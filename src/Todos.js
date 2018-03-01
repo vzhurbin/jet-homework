@@ -1,8 +1,8 @@
 import React from 'react';
 
 class Todos extends React.Component {
-  removeItem(item, i) {
-    this.props.removeTodo(item, i);
+  removeItem(item, index) {
+    this.props.removeTodo(item, index);
   }
 
   render() {

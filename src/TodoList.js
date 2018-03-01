@@ -1,7 +1,7 @@
 import React from 'react';
 import Todos from './Todos';
 
-class TodoLlist extends React.Component {
+class TodoList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -18,14 +18,14 @@ class TodoLlist extends React.Component {
   onSubmit = event => {
     event.preventDefault();
     const value = this.state.text;
-    const items = this.state.items;
+    let items = this.state.items;
     items.push(value);
     this.setState({ text: '', items: items });
   };
 
-  removeTodo(name, i) {
-    let items = this.state.items.slice();
-    items.splice(i, 1);
+  removeTodo(item, index) {
+    let items = [...this.state.items];
+    items.splice(index, 1);
     this.setState({ items });
   }
 
@@ -45,4 +45,4 @@ class TodoLlist extends React.Component {
   }
 }
 
-export default TodoLlist;
+export default TodoList;
