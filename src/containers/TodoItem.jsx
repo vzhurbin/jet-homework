@@ -15,9 +15,7 @@ export default class TodoItem extends React.Component {
         <span>{item.text}</span>
         <button>Edit</button>
         <button 
-          onClick={() => {
-            this.removeTodo(item, index);
-          }}
+          onClick={this.removeTodo}
         >
           Delete
         </button>
