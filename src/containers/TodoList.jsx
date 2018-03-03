@@ -4,52 +4,68 @@ import AddTodoForm from "./AddTodoForm";
 
 export default class TodoList extends React.Component {
   state = {
-    todos: [],
+    todos: {},
     text: '',
-    label: 'Med'
+    label: ''
   }
 
-  handleInputChange = event => {
+  onInputChange = event => {
     this.setState({ text: event.target.value })
+  }
+
+  onLabelChange = event => {
+    this.setState({ label: event })
   }
 
   addTodo = event => {
     event.preventDefault();
-    const todo = {
-      id: Date.now(),
+    const todos = { ...this.state.todos };
+    todos[`todo${Date.now()}`] = {
       label: this.state.label,
       text: this.state.text,
       isEdited: false
     }
-    const todos = [...this.state.todos, todo];
     this.setState({ todos: todos, text: '' });
   }
 
-  removeTodo = (item, index) => {
-    let todos = [...this.state.todos];
-    todos.splice(index, 1);
-    this.setState({ todos: todos });
+  removeTodo = key => {
+    const todos = {...this.state.todos};
+    delete todos[key];
+    this.setState({ todos });
   }
 
+  // editTodo = (item, index) => {
+  //   const item = {
+  //     label: this.state.label,
+  //     text: this.state.text
+  //   }
+  //   let todos = [...this.state.todos];
+  //   todos[index] = item;
+  //   this.setState({ todos: todos });
+  // }
+
   render() {
-    const todos = [...this.state.todos];
+    const todosObj = {...this.state.todos};
+    const todosArr = Object.keys(todosObj);
     const text = this.state.text;
 
     return (
       <div>
-        <AddTodoForm 
+        <AddTodoForm
           text={text}
-          handleInputChange={this.handleInputChange}
+          onLabelChange={this.onLabelChange}
+          onInputChange={this.onInputChange}
           addTodo={this.addTodo}
         />
         <ul>
-          {todos.map((item, index) => {
+          {todosArr.map(key => {
             return (
-              <TodoItem 
-                item={item}
-                index={index}
-                key={item.id}
+              <TodoItem
+                id={key}
+                key={key}
+                todo={todosObj[key]}
                 removeTodo={this.removeTodo}
+                // editTodo={this.editTodo}
               />
             );
           })}
@@ -57,4 +73,5 @@ export default class TodoList extends React.Component {
       </div>
     )
   }
+
 }

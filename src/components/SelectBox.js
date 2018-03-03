@@ -2,12 +2,20 @@ import React from 'react';
 
 const labels = [
   {
-    label: 'Высокий',
-    value: 'high',
+    label: 'Priority',
+    value: '',
   },
   {
-    label: 'Низкий',
+    label: 'Low',
     value: 'low',
+  },
+  {
+    label: 'Med',
+    value: 'med',
+  },
+  {
+    label: 'High',
+    value: 'high',
   },
 ];
 
@@ -18,7 +26,7 @@ const SelectBox = props => {
     <select value={value} onChange={e => onChange(e.target.value)}>
       {labels.map(item => {
         return (
-          <option key={`${item.value}${item.label}`} value={item.value}>
+          <option key={`${item.value}${item.label}`}>
             {item.label}
           </option>
         );
