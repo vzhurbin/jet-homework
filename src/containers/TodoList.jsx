@@ -3,23 +3,36 @@ import TodoItem from "./TodoItem";
 
 export default class TodoList extends React.Component {
   state = {
-    todos: []
+    todos: [],
+    text: '',
+    label: 'Med'
+  }
+
+  handleInputChange = event => {
+    this.setState({ text: event.target.value })
   }
 
   addTodo = event => {
     event.preventDefault();
     const todo = {
-      label: this.props.label,
-      text: this.props.text,
+      id: Date.now(),
+      label: this.state.label,
+      text: this.state.text,
       isEdited: false
     }
     const todos = [...this.state.todos, todo];
+    this.setState({ todos: todos, text: '' });
+  }
+
+  removeTodo = (item, index) => {
+    let todos = [...this.state.todos];
+    todos.splice(index, 1);
     this.setState({ todos: todos });
-    event.target.reset();
   }
 
   render() {
-    const todos = this.state.todos;
+    const todos = [...this.state.todos];
+    const text = this.state.text;
 
     return (
       <div>
@@ -29,12 +42,24 @@ export default class TodoList extends React.Component {
             <option value="low">Low</option>
             <option value="high">High</option>
           </select>
-          <input placeholder='What to do?' />
-          <button type="submit">+ Submit</button>
+          <input 
+            type="text"
+            value={text}
+            placeholder='What to do?'
+            onChange={this.handleInputChange}
+          />
+          <button>+ Add</button>
         </form>
         <ul>
-          {todos.map(item => {
-            <TodoItem todo={item} />
+          {todos.map((item, index) => {
+            return (
+              <TodoItem 
+                item={item}
+                index={index}
+                key={item.id}
+                removeTodo={this.removeTodo}
+              />
+            );
           })}
         </ul>
       </div>
