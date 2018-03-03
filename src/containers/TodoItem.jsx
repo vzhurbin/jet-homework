@@ -5,10 +5,6 @@ export default class TodoItem extends React.Component {
     this.props.removeTodo(item, index);
   }
 
-  onDeleteClick = () => {
-    this.removeTodo(item, id);
-  }
-
   render() {
     const item = this.props.item;
     const index = this.props.index;

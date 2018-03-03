@@ -1,5 +1,6 @@
 import React from "react";
 import TodoItem from "./TodoItem";
+import AddTodoForm from "./AddTodoForm";
 
 export default class TodoList extends React.Component {
   state = {
@@ -36,20 +37,11 @@ export default class TodoList extends React.Component {
 
     return (
       <div>
-        <form onSubmit={this.addTodo}>
-          <select>
-            <option value="med">Med</option>
-            <option value="low">Low</option>
-            <option value="high">High</option>
-          </select>
-          <input 
-            type="text"
-            value={text}
-            placeholder='What to do?'
-            onChange={this.handleInputChange}
-          />
-          <button>+ Add</button>
-        </form>
+        <AddTodoForm 
+          text={text}
+          handleInputChange={this.handleInputChange}
+          addTodo={this.addTodo}
+        />
         <ul>
           {todos.map((item, index) => {
             return (
