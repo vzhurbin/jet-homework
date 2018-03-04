@@ -1,5 +1,6 @@
 import React from "react";
 import SelectBox from '../components/SelectBox';
+import TextBox from '../components/TextBox';
 
 export default class AddTodoForm extends React.Component {
   render() {
@@ -11,12 +12,11 @@ export default class AddTodoForm extends React.Component {
           label={label}
           onChange={e => this.props.onLabelChange(e)}
         />
-        <input
-          type="text"
+        <TextBox
           value={text}
           placeholder='What to do?'
-          autoFocus
           onChange={e => this.props.onInputChange(e)}
+          autoFocus
         />
         <button>+ Add</button>
       </form>

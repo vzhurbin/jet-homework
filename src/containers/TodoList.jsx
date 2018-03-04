@@ -3,7 +3,7 @@ import TodoItem from "./TodoItem";
 import AddTodoForm from "./AddTodoForm";
 import TextBox from '../components/TextBox';
 import Radio from '../components/Radio';
-import { queryFilter, radioFilter } from "../helpers";
+import { queryFilter } from "../helpers";
 
 export default class TodoList extends React.Component {
   state = {
@@ -41,14 +41,15 @@ export default class TodoList extends React.Component {
     return (
       <div>
         <AddTodoForm
-          text={this.state.text}
           label={this.state.label}
           onLabelChange={e => this.setState({ label: e.target.value })}
-          onInputChange={e => this.setState({ text: e.target.value })}
+          text={this.state.text}
+          onInputChange={value => this.setState({ text: value })}
           addTodo={this.addTodo}
         />
         <TextBox
           value={search}
+          placeholder="Search..."
           onChange={value => this.setState({ search: value })}
         />
         <Radio
