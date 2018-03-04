@@ -9,14 +9,14 @@ export default class AddTodoForm extends React.Component {
       <form onSubmit={e => this.props.addTodo(e)}>
         <SelectBox
           label={label}
-          onChange={e => this.props.onChange(e)}
+          onChange={e => this.props.onLabelChange(e)}
         />
         <input
           type="text"
           value={text}
           placeholder='What to do?'
           autoFocus
-          onChange={e => this.props.onFormInputChange(e)}
+          onChange={e => this.props.onInputChange(e)}
         />
         <button>+ Add</button>
       </form>

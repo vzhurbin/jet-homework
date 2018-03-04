@@ -3,19 +3,15 @@ import TodoItem from "./TodoItem";
 import AddTodoForm from "./AddTodoForm";
 import TextBox from '../components/TextBox';
 import Radio from '../components/Radio';
-import { filterObject } from "../helpers";
+import { queryFilter, radioFilter } from "../helpers";
 
 export default class TodoList extends React.Component {
   state = {
-    query: undefined,
+    search: '',
     todos: {},
     text: '',
-    label: '',
+    label: 'Low',
     selectedRadio: ''
-  }
-
-  onFormInputChange = event => {
-    this.setState({ text: event.target.value })
   }
 
   // BUG: initial label is not parsed
@@ -38,25 +34,26 @@ export default class TodoList extends React.Component {
 
   render() {
     const todosObj = {...this.state.todos};
-    const query = this.state.query;
-    const todosKeys = query ? filterObject(todosObj, query) : Object.keys(todosObj);
+    const search = this.state.search;
+    const radio = this.state.selectedRadio;
+    const todosKeys = queryFilter(todosObj, search, radio);
 
     return (
       <div>
         <AddTodoForm
           text={this.state.text}
           label={this.state.label}
-          onChange={value => this.setState({ label: value })}
-          onFormInputChange={e => this.setState({ text: e.target.value })}
+          onLabelChange={e => this.setState({ label: e.target.value })}
+          onInputChange={e => this.setState({ text: e.target.value })}
           addTodo={this.addTodo}
         />
         <TextBox
-          value={query}
-          onChange={value => this.setState({ query: value })}
+          value={search}
+          onChange={value => this.setState({ search: value })}
         />
         <Radio
           selectedRadio = {this.state.selectedRadio}
-          onRadioChange={value => this.setState({ selectedRadio: value })}
+          onChange={e => this.setState({ selectedRadio: e.target.value })}
         />
         <ul>
           {todosKeys.map(key => {

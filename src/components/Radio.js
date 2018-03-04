@@ -2,26 +2,21 @@ import React from 'react';
 
 const labels = [
   // {
-  //   label: 'Priority',
-  //   value: '',
+  //   value: 'Priority',
   // },
   {
-    label: 'Low',
     value: 'low',
   },
   {
-    label: 'Med',
     value: 'med',
   },
   {
-    label: 'High',
     value: 'high',
   },
 ];
 
 const Radio = props => {
   const selectedRadio = props.selectedRadio;
-  const onChange = props.onRadioChange;
   return (
     <div 
       className="radio-buttons"
@@ -29,15 +24,15 @@ const Radio = props => {
       {labels.map(item => {
         return (
           <label 
-            key={`radio${item.value}${item.label}`}
+            key={`radio${item.value}`}
           >
             <input
               type="radio"
               value={item.value}
               checked={selectedRadio === item.value}
-              onChange={e => onChange(e.target.value)}
+              onChange={e => props.onChange(e)}
             />
-              {item.label}
+              {item.value}
           </label>
         );
       })}

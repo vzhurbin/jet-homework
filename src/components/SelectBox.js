@@ -20,11 +20,11 @@ const labels = [
 ];
 
 const SelectBox = props => {
-  const onChange = props.onChange;
+  // const onChange = props.onLabelChange;
   return (
     <select 
       label={props.label} 
-      onChange={e => onChange(e.target.value)}
+      onChange={e => props.onChange(e)}
     >
       {labels.map(item => {
         return (
