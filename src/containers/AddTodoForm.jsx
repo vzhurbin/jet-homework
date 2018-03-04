@@ -2,33 +2,21 @@ import React from "react";
 import SelectBox from '../components/SelectBox';
 
 export default class AddTodoForm extends React.Component {
-
-  handleInputChange = event => {
-    this.props.onInputChange(event);
-  }
-
-  handleLabelChange = event => {
-    this.props.onLabelChange(event);
-  }
-
-  handleAddTodo = event => {
-    this.props.addTodo(event);
-  }
-
   render() {
     const text = this.props.text;
     const label = this.props.label;
     return (
-      <form onSubmit={this.handleAddTodo}>
+      <form onSubmit={e => this.props.addTodo(e)}>
         <SelectBox
           value={label}
-          onChange={this.handleLabelChange}
+          onChange={e => this.props.onEditLabel(e)}
         />
         <input
           type="text"
           value={text}
           placeholder='What to do?'
-          onChange={this.handleInputChange}
+          autoFocus
+          onChange={e => this.props.onFormInputChange(e)}
         />
         <button>+ Add</button>
       </form>

@@ -1,10 +1,10 @@
 import React from 'react';
 
 const labels = [
-  {
-    label: 'Priority',
-    value: '',
-  },
+  // {
+  //   label: 'Priority',
+  //   value: '',
+  // },
   {
     label: 'Low',
     value: 'low',

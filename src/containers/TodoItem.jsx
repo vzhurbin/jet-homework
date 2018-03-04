@@ -1,46 +1,108 @@
 import React from 'react';
+import SelectBox from '../components/SelectBox';
+import Button from '../components/Button';
+import TextBox from '../components/TextBox';
 
 export default class TodoItem extends React.Component {
-  render() {
-    const todo = this.props.todo;
+  state = {
+    text: this.props.todo.text,
+    label: this.props.todo.label,
+    isEdited: false
+  }
+  
+  // removeTodoHandler = key => {
+  //   this.props.removeTodo(key);
+  // }
+
+  // editTodoHandler = key => {
+  //   this.props.editTodo(key);
+  // }
+
+  // removeTodo = id => {
+  //   const todos = {...this.props.todos};
+  //   console.log(id);
+  //   console.log(todos[id]);
+  //   delete todos[id];
+  //   return todos;
+  // }
+
+  onEditText = event => {
+    this.setState({ text: event })
+  }
+
+  onEditLabel = event => {
+    this.setState({ label: event })
+  }
+
+  onSaveEdit = () => {
+    console.log('saving!!')
+    const saveEdit = this.props.saveEdit;
     const key = this.props.id;
+    const todo = {
+      text: this.state.text,
+      type: this.state.label,
+      isEdited: false      
+    };
+    saveEdit(todo, key);
+  };
+
+  onCancelEdit = () => {
+    console.log('cancelled!!')    
+    this.setState({
+      text: this.props.todo.text,
+      label: this.props.todo.type,
+      isEdited: false
+    });
+  };
+
+  renderView() {
+    // const todo = this.props.todo;
+    const id = this.props.id;
     return (
-      <div className="todo-item" key={key}>
-        <strong>{todo.label}</strong>
-        <span>{todo.text}</span>
-        {/* <button
-          onClick={this.editTodo}  
-        >
-          Edit
-        </button> */}
-        <button 
-          onClick={() => this.props.removeTodo(key)}
-        >
-          Delete
-        </button>
+      <div className="todo-item" key={id}>
+        <strong>{this.state.label}</strong>
+        <span>{this.state.text}</span>
+        <Button
+          onClick={() => this.setState({ isEdited: true })}
+          children="Edit"
+        />
+        <Button 
+          onClick={id => this.props.removeTodo(id)}
+          children="Delete"
+        />
       </div>
     );
   }
 
-  // renderEdit() {
-  //   const item = this.props.item;
-  //   const index = this.props.index;
-  //   const id = this.props.item.id;
-  //   return (
-  //     <div className="todo-item" key={id}>
-  //       <strong>{item.label}</strong>
-  //       <span>{item.text}</span>
-  //       <button
-  //         onClick={this.editTodo}  
-  //       >
-  //         Edit
-  //       </button>
-  //       <button 
-  //         onClick={this.removeTodo}
-  //       >
-  //         Delete
-  //       </button>
-  //     </div>
-  //   );
-  // }
+  renderEdit() {
+    const text = this.state.text;
+    const label = this.state.label;
+    // const todo = this.props.todo;
+    const id = this.props.id;
+    return (
+      <div className="todo-item" key={id}>
+        <SelectBox 
+          value={label}
+          onChange={this.onEditLabel}       
+        />
+        <TextBox
+          value={text}
+          onChange={this.onEditText}
+        />
+        <Button
+          onClick={this.onSaveEdit}
+          children="Save"
+        />
+        <Button 
+          onClick={this.onCancelEdit}
+          children="Cancel"
+        />
+      </div>
+    );
+  }
+
+  render() {
+    const isEdited = this.state.isEdited;
+    return isEdited ? this.renderEdit() : this.renderView();
+  }
 }

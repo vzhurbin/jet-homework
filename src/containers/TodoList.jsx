@@ -9,12 +9,12 @@ export default class TodoList extends React.Component {
     label: ''
   }
 
-  onInputChange = event => {
-    this.setState({ text: event.target.value })
+  onFormLabelChange = event => {
+    this.setState({ label: event })
   }
 
-  onLabelChange = event => {
-    this.setState({ label: event })
+  onFormInputChange = event => {
+    this.setState({ text: event.target.value })
   }
 
   addTodo = event => {
@@ -28,44 +28,57 @@ export default class TodoList extends React.Component {
     this.setState({ todos: todos, text: '' });
   }
 
-  removeTodo = key => {
+  removeTodo = id => {
     const todos = {...this.state.todos};
-    delete todos[key];
+    // const id = this.props.id;
+    console.log(id);
+    // console.log(todos[id]);
+    delete todos[id];
     this.setState({ todos });
   }
 
-  // editTodo = (item, index) => {
-  //   const item = {
-  //     label: this.state.label,
-  //     text: this.state.text
-  //   }
-  //   let todos = [...this.state.todos];
-  //   todos[index] = item;
-  //   this.setState({ todos: todos });
+  // removeTodoHandler = id => {
+  //   const todos = this.props.onClick;
+  //   this.setState(todos);
   // }
+  
+  editTodo = key => {
+    const todos = { ...this.state.todos };  
+    todos[key]['isEdited'] = true;
+    this.setState({ todos });
+  }
+  
+  saveEdit = (todo, key) => {
+    const todos = { ...this.state.todos };  
+    todos[key] = todo;
+    this.setState({ todos });
+  };
 
   render() {
     const todosObj = {...this.state.todos};
-    const todosArr = Object.keys(todosObj);
+    const todosKeys = Object.keys(todosObj);
     const text = this.state.text;
 
     return (
       <div>
         <AddTodoForm
           text={text}
-          onLabelChange={this.onLabelChange}
-          onInputChange={this.onInputChange}
+          onEditLabel={this.onFormLabelChange}
+          onFormInputChange={this.onFormInputChange}
           addTodo={this.addTodo}
         />
         <ul>
-          {todosArr.map(key => {
+          {todosKeys.map(key => {
             return (
               <TodoItem
                 id={key}
                 key={key}
+                // todos={todosObj}
                 todo={todosObj[key]}
+                // isEdited={todosObj[key]['isEdited']}
                 removeTodo={this.removeTodo}
-                // editTodo={this.editTodo}
+                editTodo={this.editTodo}
+                saveEdit={this.saveEdit}
               />
             );
           })}
