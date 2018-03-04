@@ -1,9 +1,12 @@
 import React from "react";
 import TodoItem from "./TodoItem";
 import AddTodoForm from "./AddTodoForm";
+import TextBox from '../components/TextBox';
+import { filterObject } from "../helpers";
 
 export default class TodoList extends React.Component {
   state = {
+    query: undefined,
     todos: {},
     text: '',
     label: ''
@@ -17,6 +20,7 @@ export default class TodoList extends React.Component {
     this.setState({ text: event.target.value })
   }
 
+  // BUG: initial label is not parsed
   addTodo = event => {
     event.preventDefault();
     const todos = { ...this.state.todos };
@@ -36,7 +40,8 @@ export default class TodoList extends React.Component {
 
   render() {
     const todosObj = {...this.state.todos};
-    const todosKeys = Object.keys(todosObj);
+    const query = this.state.query;
+    const todosKeys = query ? filterObject(todosObj, query) : Object.keys(todosObj);
     const text = this.state.text;
 
     return (
@@ -46,6 +51,10 @@ export default class TodoList extends React.Component {
           onEditLabel={this.onFormLabelChange}
           onFormInputChange={this.onFormInputChange}
           addTodo={this.addTodo}
+        />
+        <TextBox
+          value={query}
+          onChange={value => this.setState({ query: value })}
         />
         <ul>
           {todosKeys.map(key => {

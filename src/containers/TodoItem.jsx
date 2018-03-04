@@ -10,14 +10,6 @@ export default class TodoItem extends React.Component {
     isEdited: false
   }
 
-  onEditText = event => {
-    this.setState({ text: event })
-  }
-
-  onEditLabel = event => {
-    this.setState({ label: event })
-  }
-
   onSaveEdit = () => {
     this.setState({
       text: this.state.text,
@@ -26,6 +18,8 @@ export default class TodoItem extends React.Component {
     });
   };
 
+  // BUG: after one edit onCancel restores initial value
+  // not the one before current edit
   onCancelEdit = () => {
     this.setState({
       text: this.props.todo.text,
@@ -60,11 +54,11 @@ export default class TodoItem extends React.Component {
       <div className="todo-item" key={id}>
         <SelectBox
           value={label}
-          onChange={this.onEditLabel}
+          onChange={value => this.setState({ label: value })}
         />
         <TextBox
           value={text}
-          onChange={this.onEditText}
+          onChange={value => this.setState({ text: value })}
         />
         <Button
           onClick={this.onSaveEdit}
