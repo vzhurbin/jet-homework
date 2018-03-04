@@ -30,21 +30,7 @@ export default class TodoList extends React.Component {
 
   removeTodo = id => {
     const todos = {...this.state.todos};
-    // const id = this.props.id;
-    console.log(id);
-    // console.log(todos[id]);
     delete todos[id];
-    this.setState({ todos });
-  }
-
-  // removeTodoHandler = id => {
-  //   const todos = this.props.onClick;
-  //   this.setState(todos);
-  // }
-  
-  editTodo = key => {
-    const todos = { ...this.state.todos };  
-    todos[key]['isEdited'] = true;
     this.setState({ todos });
   }
   
@@ -73,11 +59,8 @@ export default class TodoList extends React.Component {
               <TodoItem
                 id={key}
                 key={key}
-                // todos={todosObj}
                 todo={todosObj[key]}
-                // isEdited={todosObj[key]['isEdited']}
                 removeTodo={this.removeTodo}
-                editTodo={this.editTodo}
                 saveEdit={this.saveEdit}
               />
             );

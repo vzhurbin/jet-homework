@@ -9,22 +9,6 @@ export default class TodoItem extends React.Component {
     label: this.props.todo.label,
     isEdited: false
   }
-  
-  // removeTodoHandler = key => {
-  //   this.props.removeTodo(key);
-  // }
-
-  // editTodoHandler = key => {
-  //   this.props.editTodo(key);
-  // }
-
-  // removeTodo = id => {
-  //   const todos = {...this.props.todos};
-  //   console.log(id);
-  //   console.log(todos[id]);
-  //   delete todos[id];
-  //   return todos;
-  // }
 
   onEditText = event => {
     this.setState({ text: event })
@@ -56,7 +40,6 @@ export default class TodoItem extends React.Component {
   };
 
   renderView() {
-    // const todo = this.props.todo;
     const id = this.props.id;
     return (
       <div className="todo-item" key={id}>
@@ -67,7 +50,7 @@ export default class TodoItem extends React.Component {
           children="Edit"
         />
         <Button 
-          onClick={id => this.props.removeTodo(id)}
+          onClick={() => this.props.removeTodo(id)}
           children="Delete"
         />
       </div>
@@ -77,7 +60,6 @@ export default class TodoItem extends React.Component {
   renderEdit() {
     const text = this.state.text;
     const label = this.state.label;
-    // const todo = this.props.todo;
     const id = this.props.id;
     return (
       <div className="todo-item" key={id}>
