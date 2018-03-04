@@ -33,12 +33,6 @@ export default class TodoList extends React.Component {
     delete todos[id];
     this.setState({ todos });
   }
-  
-  saveEdit = (todo, key) => {
-    const todos = { ...this.state.todos };  
-    todos[key] = todo;
-    this.setState({ todos });
-  };
 
   render() {
     const todosObj = {...this.state.todos};

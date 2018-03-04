@@ -19,19 +19,14 @@ export default class TodoItem extends React.Component {
   }
 
   onSaveEdit = () => {
-    console.log('saving!!')
-    const saveEdit = this.props.saveEdit;
-    const key = this.props.id;
-    const todo = {
+    this.setState({
       text: this.state.text,
       type: this.state.label,
-      isEdited: false      
-    };
-    saveEdit(todo, key);
+      isEdited: false
+    });
   };
 
   onCancelEdit = () => {
-    console.log('cancelled!!')    
     this.setState({
       text: this.props.todo.text,
       label: this.props.todo.type,
@@ -49,7 +44,7 @@ export default class TodoItem extends React.Component {
           onClick={() => this.setState({ isEdited: true })}
           children="Edit"
         />
-        <Button 
+        <Button
           onClick={() => this.props.removeTodo(id)}
           children="Delete"
         />
@@ -63,9 +58,9 @@ export default class TodoItem extends React.Component {
     const id = this.props.id;
     return (
       <div className="todo-item" key={id}>
-        <SelectBox 
+        <SelectBox
           value={label}
-          onChange={this.onEditLabel}       
+          onChange={this.onEditLabel}
         />
         <TextBox
           value={text}
@@ -75,7 +70,7 @@ export default class TodoItem extends React.Component {
           onClick={this.onSaveEdit}
           children="Save"
         />
-        <Button 
+        <Button
           onClick={this.onCancelEdit}
           children="Cancel"
         />
