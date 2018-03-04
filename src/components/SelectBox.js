@@ -20,13 +20,15 @@ const labels = [
 ];
 
 const SelectBox = props => {
-  const value = props.value;
   const onChange = props.onChange;
   return (
-    <select value={value} onChange={e => onChange(e.target.value)}>
+    <select 
+      label={props.label} 
+      onChange={e => onChange(e.target.value)}
+    >
       {labels.map(item => {
         return (
-          <option key={`${item.value}${item.label}`}>
+          <option key={`select${item.value}${item.label}`}>
             {item.label}
           </option>
         );

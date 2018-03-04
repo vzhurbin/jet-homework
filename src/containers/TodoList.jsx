@@ -2,6 +2,7 @@ import React from "react";
 import TodoItem from "./TodoItem";
 import AddTodoForm from "./AddTodoForm";
 import TextBox from '../components/TextBox';
+import Radio from '../components/Radio';
 import { filterObject } from "../helpers";
 
 export default class TodoList extends React.Component {
@@ -9,11 +10,8 @@ export default class TodoList extends React.Component {
     query: undefined,
     todos: {},
     text: '',
-    label: ''
-  }
-
-  onFormLabelChange = event => {
-    this.setState({ label: event })
+    label: '',
+    selectedRadio: ''
   }
 
   onFormInputChange = event => {
@@ -42,19 +40,23 @@ export default class TodoList extends React.Component {
     const todosObj = {...this.state.todos};
     const query = this.state.query;
     const todosKeys = query ? filterObject(todosObj, query) : Object.keys(todosObj);
-    const text = this.state.text;
 
     return (
       <div>
         <AddTodoForm
-          text={text}
-          onEditLabel={this.onFormLabelChange}
-          onFormInputChange={this.onFormInputChange}
+          text={this.state.text}
+          label={this.state.label}
+          onChange={value => this.setState({ label: value })}
+          onFormInputChange={e => this.setState({ text: e.target.value })}
           addTodo={this.addTodo}
         />
         <TextBox
           value={query}
           onChange={value => this.setState({ query: value })}
+        />
+        <Radio
+          selectedRadio = {this.state.selectedRadio}
+          onRadioChange={value => this.setState({ selectedRadio: value })}
         />
         <ul>
           {todosKeys.map(key => {

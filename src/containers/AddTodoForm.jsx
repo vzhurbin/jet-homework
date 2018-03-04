@@ -8,8 +8,8 @@ export default class AddTodoForm extends React.Component {
     return (
       <form onSubmit={e => this.props.addTodo(e)}>
         <SelectBox
-          value={label}
-          onChange={e => this.props.onEditLabel(e)}
+          label={label}
+          onChange={e => this.props.onChange(e)}
         />
         <input
           type="text"
