@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import labels from '../constants/labels';
 
 const propTypes = {
-  selectedRadio: PropTypes.string.isRequired
+  selectedRadio: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired
 };
 
-function Radio(props) {
-  const selectedRadio = props.selectedRadio;
+function Radio({ selectedRadio, onChange }) {
   return (
     <div className="radio-buttons">
       {labels.map(item => {
@@ -17,7 +17,7 @@ function Radio(props) {
               type="radio"
               value={item.value}
               checked={selectedRadio === item.value}
-              onChange={e => props.onChange(e)}
+              onChange={e => onChange(e)}
             />
             {item.value}
           </label>

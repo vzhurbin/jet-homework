@@ -6,9 +6,7 @@ const propTypes = {
   onClick: PropTypes.func.isRequired
 };
 
-function Button(props) {
-  const onClick = props.onClick;
-  const value = props.value;
+function Button({ onClick, value }) {
   return <button onClick={onClick}>{value}</button>;
 }
 

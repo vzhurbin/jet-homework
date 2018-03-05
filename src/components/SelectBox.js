@@ -11,9 +11,9 @@ const defaultProps = {
   label: ''
 };
 
-function SelectBox(props) {
+function SelectBox({ label, onChange }) {
   return (
-    <select label={props.label} onChange={e => props.onChange(e)}>
+    <select label={label} onChange={e => onChange(e)}>
       {labels.map(item => {
         return <option key={`select${item.value}`}>{item.value}</option>;
       })}

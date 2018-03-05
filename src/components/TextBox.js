@@ -12,10 +12,7 @@ const defaultProps = {
   placeholder: ''
 };
 
-function TextBox(props) {
-  const onChange = props.onChange;
-  const value = props.value;
-  const placeholder = props.placeholder;
+function TextBox({ onChange, value, placeholder }) {
   return (
     <input
       type="text"
