@@ -32,6 +32,11 @@ export default class TodoList extends React.Component {
     this.setState({ todos });
   };
 
+  onLabelChange = event => this.setState({ label: event.target.value });
+  onInputChange = value => this.setState({ text: value });
+  onSearchChange = value => this.setState({ search: value });
+  onRadioChange = event => this.setState({ selectedRadio: event.target.value });
+
   render() {
     const { label, text, search, todos, selectedRadio } = this.state;
     const todosKeys = queryFilter(todos, search, selectedRadio);
@@ -40,20 +45,17 @@ export default class TodoList extends React.Component {
       <div>
         <AddTodoForm
           label={label}
-          onLabelChange={e => this.setState({ label: e.target.value })}
+          onLabelChange={this.onLabelChange}
           text={text}
-          onInputChange={value => this.setState({ text: value })}
+          onInputChange={this.onInputChange}
           addTodo={this.addTodo}
         />
         <TextBox
           value={search}
           placeholder="Search..."
-          onChange={value => this.setState({ search: value })}
+          onChange={this.onSearchChange}
         />
-        <Radio
-          selectedRadio={selectedRadio}
-          onChange={e => this.setState({ selectedRadio: e.target.value })}
-        />
+        <Radio selectedRadio={selectedRadio} onChange={this.onRadioChange} />
         <ul>
           {todosKeys.map(key => {
             return (

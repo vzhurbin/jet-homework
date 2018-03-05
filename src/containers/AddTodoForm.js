@@ -14,11 +14,11 @@ const propTypes = {
 function AddTodoForm({ text, label, addTodo, onLabelChange, onInputChange }) {
   return (
     <form onSubmit={e => addTodo(e)}>
-      <SelectBox label={label} onChange={e => onLabelChange(e)} />
+      <SelectBox label={label} onChange={onLabelChange} />
       <TextBox
         value={text}
         placeholder="What to do?"
-        onChange={e => onInputChange(e)}
+        onChange={onInputChange}
         autoFocus
       />
       <button>+ Add</button>

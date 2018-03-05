@@ -37,18 +37,24 @@ class TodoItem extends React.Component {
     });
   };
 
+  onClickEdit = () => this.setState({ isEdited: true });
+  onClickDelete = () => {
+    const { removeTodo, id } = this.props;
+    return removeTodo(id);
+  };
+
+  onLabelChange = event => this.setState({ label: event.target.value });
+  onTextChange = value => this.setState({ text: value });
+
   renderView() {
-    const { id, removeTodo } = this.props;
+    const { id } = this.props;
     const { label, text } = this.state;
     return (
       <div className="todo-item" key={id}>
         <strong>{label}</strong>
         <span>{text}</span>
-        <Button
-          onClick={() => this.setState({ isEdited: true })}
-          value="Edit"
-        />
-        <Button onClick={() => removeTodo(id)} value="Delete" />
+        <Button onClick={this.onClickEdit} value="Edit" />
+        <Button onClick={this.onClickDelete} value="Delete" />
       </div>
     );
   }
@@ -58,14 +64,8 @@ class TodoItem extends React.Component {
     const { label, text } = this.state;
     return (
       <div className="todo-item" key={id}>
-        <SelectBox
-          value={label}
-          onChange={value => this.setState({ label: value })}
-        />
-        <TextBox
-          value={text}
-          onChange={value => this.setState({ text: value })}
-        />
+        <SelectBox label={label} onChange={this.onLabelChange} />
+        <TextBox value={text} onChange={this.onTextChange} />
         <Button onClick={this.onSaveEdit} value="Save" />
         <Button onClick={this.onCancelEdit} value="Cancel" />
       </div>
