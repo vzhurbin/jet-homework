@@ -1,8 +1,6 @@
 import React from 'react';
-import TodoItem from './TodoItem';
-import AddTodoForm from './AddTodoForm';
-import TextBox from '../components/TextBox';
-import Radio from '../components/Radio';
+import { TodoItem, AddTodoForm } from '../containers';
+import { TextBox, Radio } from '../components';
 import { queryFilter } from '../helpers';
 
 export default class TodoList extends React.Component {

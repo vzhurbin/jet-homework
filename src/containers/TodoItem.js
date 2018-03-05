@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import SelectBox from '../components/SelectBox';
-import Button from '../components/Button';
-import TextBox from '../components/TextBox';
+import { TextBox, Button, SelectBox } from '../components';
 
 const propTypes = {
   id: PropTypes.string.isRequired,
