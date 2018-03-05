@@ -1,9 +1,16 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import SelectBox from '../components/SelectBox';
 import Button from '../components/Button';
 import TextBox from '../components/TextBox';
 
-export default class TodoItem extends React.Component {
+const propTypes = {
+  id: PropTypes.string.isRequired,
+  removeTodo: PropTypes.func.isRequired,
+  todo: PropTypes.object.isRequired
+};
+
+class TodoItem extends React.Component {
   state = {
     text: this.props.todo.text,
     label: this.props.todo.label,
@@ -13,7 +20,7 @@ export default class TodoItem extends React.Component {
   onSaveEdit = () => {
     this.setState({
       text: this.state.text,
-      type: this.state.label,
+      label: this.state.label,
       isEdited: false
     });
   };
@@ -23,7 +30,7 @@ export default class TodoItem extends React.Component {
   onCancelEdit = () => {
     this.setState({
       text: this.props.todo.text,
-      label: this.props.todo.type,
+      label: this.props.todo.label,
       isEdited: false
     });
   };
@@ -68,3 +75,7 @@ export default class TodoItem extends React.Component {
     return isEdited ? this.renderEdit() : this.renderView();
   }
 }
+
+TodoItem.propTypes = propTypes;
+
+export default TodoItem;

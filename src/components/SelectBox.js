@@ -1,7 +1,17 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import labels from '../constants/labels';
 
-export default function SelectBox(props) {
+const propTypes = {
+  onChange: PropTypes.func.isRequired,
+  label: PropTypes.string
+};
+
+const defaultProps = {
+  label: ''
+};
+
+function SelectBox(props) {
   return (
     <select label={props.label} onChange={e => props.onChange(e)}>
       {labels.map(item => {
@@ -10,3 +20,8 @@ export default function SelectBox(props) {
     </select>
   );
 }
+
+SelectBox.propTypes = propTypes;
+SelectBox.defaultProps = defaultProps;
+
+export default SelectBox;

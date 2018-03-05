@@ -1,8 +1,17 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import SelectBox from '../components/SelectBox';
 import TextBox from '../components/TextBox';
 
-export default function AddTodoForm(props) {
+const propTypes = {
+  text: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
+  addTodo: PropTypes.func.isRequired,
+  onLabelChange: PropTypes.func.isRequired,
+  onInputChange: PropTypes.func.isRequired
+};
+
+function AddTodoForm(props) {
   const text = props.text;
   const label = props.label;
   return (
@@ -18,3 +27,7 @@ export default function AddTodoForm(props) {
     </form>
   );
 }
+
+AddTodoForm.propTypes = propTypes;
+
+export default AddTodoForm;

@@ -1,9 +1,21 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-export default function TextBox(props) {
+const propTypes = {
+  onChange: PropTypes.func.isRequired,
+  value: PropTypes.string,
+  placeholder: PropTypes.string
+};
+
+const defaultProps = {
+  value: '',
+  placeholder: ''
+};
+
+function TextBox(props) {
   const onChange = props.onChange;
-  const value = props.value || '';
-  const placeholder = props.placeholder || '';
+  const value = props.value;
+  const placeholder = props.placeholder;
   return (
     <input
       type="text"
@@ -13,3 +25,8 @@ export default function TextBox(props) {
     />
   );
 }
+
+TextBox.propTypes = propTypes;
+TextBox.defaultProps = defaultProps;
+
+export default TextBox;

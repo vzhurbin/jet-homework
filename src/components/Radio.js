@@ -1,7 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import labels from '../constants/labels';
 
-export default function Radio(props) {
+const propTypes = {
+  selectedRadio: PropTypes.string.isRequired
+};
+
+function Radio(props) {
   const selectedRadio = props.selectedRadio;
   return (
     <div className="radio-buttons">
@@ -21,3 +26,7 @@ export default function Radio(props) {
     </div>
   );
 }
+
+Radio.propTypes = propTypes;
+
+export default Radio;
