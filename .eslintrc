@@ -6,7 +6,7 @@
     "prettier",
     "plugin:react/recommended"
   ],
-  "plugins": ["prettier"],
+  "plugins": ["prettier", "react"],
   "env": {
     "browser": true,
     "node": true,
@@ -17,6 +17,7 @@
     "sourceType": "module"
   },
   "rules": {
+    "react/prop-types": 0,
     "prettier/prettier": [
       "error",
       {
