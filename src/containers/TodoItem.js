@@ -12,15 +12,16 @@ const propTypes = {
 
 class TodoItem extends React.Component {
   state = {
-    text: this.props.todo.text,
     label: this.props.todo.label,
+    text: this.props.todo.text,
     isEdited: false
   };
 
   onSaveEdit = () => {
+    const { label, text } = this.state;
     this.setState({
-      text: this.state.text,
-      label: this.state.label,
+      text: text,
+      label: label,
       isEdited: false
     });
   };
@@ -28,32 +29,33 @@ class TodoItem extends React.Component {
   // BUG: after one edit onCancel restores initial value
   // not the one before current edit
   onCancelEdit = () => {
+    const { todo } = this.props;
     this.setState({
-      text: this.props.todo.text,
-      label: this.props.todo.label,
+      text: todo.text,
+      label: todo.label,
       isEdited: false
     });
   };
 
   renderView() {
-    const id = this.props.id;
+    const { id, removeTodo } = this.props;
+    const { label, text } = this.state;
     return (
       <div className="todo-item" key={id}>
-        <strong>{this.state.label}</strong>
-        <span>{this.state.text}</span>
+        <strong>{label}</strong>
+        <span>{text}</span>
         <Button
           onClick={() => this.setState({ isEdited: true })}
           value="Edit"
         />
-        <Button onClick={() => this.props.removeTodo(id)} value="Delete" />
+        <Button onClick={() => removeTodo(id)} value="Delete" />
       </div>
     );
   }
 
   renderEdit() {
-    const text = this.state.text;
-    const label = this.state.label;
-    const id = this.props.id;
+    const { id } = this.props;
+    const { label, text } = this.state;
     return (
       <div className="todo-item" key={id}>
         <SelectBox
@@ -71,7 +73,7 @@ class TodoItem extends React.Component {
   }
 
   render() {
-    const isEdited = this.state.isEdited;
+    const { isEdited } = this.state;
     return isEdited ? this.renderEdit() : this.renderView();
   }
 }

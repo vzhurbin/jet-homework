@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const propTypes = {
   value: PropTypes.string.isRequired,
-  onClick: PropTypes.func.isRequired
+  onClick: PropTypes.func
 };
 
 function Button({ onClick, value }) {

@@ -16,13 +16,14 @@ export default class TodoList extends React.Component {
 
   addTodo = event => {
     event.preventDefault();
-    const todos = { ...this.state.todos };
-    todos[`todo${Date.now()}`] = {
-      label: this.state.label,
-      text: this.state.text,
+    const { label, text, todos } = this.state;
+    const newTodos = { ...todos };
+    newTodos[`todo${Date.now()}`] = {
+      label: label,
+      text: text,
       isEdited: false
     };
-    this.setState({ todos: todos, text: '' });
+    this.setState({ todos: newTodos, text: '' });
   };
 
   removeTodo = id => {
@@ -32,17 +33,15 @@ export default class TodoList extends React.Component {
   };
 
   render() {
-    const todosObj = { ...this.state.todos };
-    const search = this.state.search;
-    const radio = this.state.selectedRadio;
-    const todosKeys = queryFilter(todosObj, search, radio);
+    const { label, text, search, todos, selectedRadio } = this.state;
+    const todosKeys = queryFilter(todos, search, selectedRadio);
 
     return (
       <div>
         <AddTodoForm
-          label={this.state.label}
+          label={label}
           onLabelChange={e => this.setState({ label: e.target.value })}
-          text={this.state.text}
+          text={text}
           onInputChange={value => this.setState({ text: value })}
           addTodo={this.addTodo}
         />
@@ -52,7 +51,7 @@ export default class TodoList extends React.Component {
           onChange={value => this.setState({ search: value })}
         />
         <Radio
-          selectedRadio={this.state.selectedRadio}
+          selectedRadio={selectedRadio}
           onChange={e => this.setState({ selectedRadio: e.target.value })}
         />
         <ul>
@@ -61,9 +60,8 @@ export default class TodoList extends React.Component {
               <TodoItem
                 id={key}
                 key={key}
-                todo={todosObj[key]}
+                todo={todos[key]}
                 removeTodo={this.removeTodo}
-                saveEdit={this.saveEdit}
               />
             );
           })}

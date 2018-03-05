@@ -11,16 +11,14 @@ const propTypes = {
   onInputChange: PropTypes.func.isRequired
 };
 
-function AddTodoForm(props) {
-  const text = props.text;
-  const label = props.label;
+function AddTodoForm({ text, label, addTodo, onLabelChange, onInputChange }) {
   return (
-    <form onSubmit={e => props.addTodo(e)}>
-      <SelectBox label={label} onChange={e => props.onLabelChange(e)} />
+    <form onSubmit={e => addTodo(e)}>
+      <SelectBox label={label} onChange={e => onLabelChange(e)} />
       <TextBox
         value={text}
         placeholder="What to do?"
-        onChange={e => props.onInputChange(e)}
+        onChange={e => onInputChange(e)}
         autoFocus
       />
       <button>+ Add</button>
