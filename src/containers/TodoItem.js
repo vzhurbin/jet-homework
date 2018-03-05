@@ -8,7 +8,7 @@ export default class TodoItem extends React.Component {
     text: this.props.todo.text,
     label: this.props.todo.label,
     isEdited: false
-  }
+  };
 
   onSaveEdit = () => {
     this.setState({
@@ -36,12 +36,9 @@ export default class TodoItem extends React.Component {
         <span>{this.state.text}</span>
         <Button
           onClick={() => this.setState({ isEdited: true })}
-          children="Edit"
+          value="Edit"
         />
-        <Button
-          onClick={() => this.props.removeTodo(id)}
-          children="Delete"
-        />
+        <Button onClick={() => this.props.removeTodo(id)} value="Delete" />
       </div>
     );
   }
@@ -60,14 +57,8 @@ export default class TodoItem extends React.Component {
           value={text}
           onChange={value => this.setState({ text: value })}
         />
-        <Button
-          onClick={this.onSaveEdit}
-          children="Save"
-        />
-        <Button
-          onClick={this.onCancelEdit}
-          children="Cancel"
-        />
+        <Button onClick={this.onSaveEdit} value="Save" />
+        <Button onClick={this.onCancelEdit} value="Cancel" />
       </div>
     );
   }

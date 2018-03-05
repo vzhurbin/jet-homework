@@ -1,9 +1,9 @@
 export const filterObj = (arr, obj, query, searchKey) => {
-    return arr.filter(key => {
-      const str = obj[key][searchKey].toUpperCase();
-      return str.indexOf(query.toUpperCase()) > -1;
-    })
-}
+  return arr.filter(key => {
+    const str = obj[key][searchKey].toUpperCase();
+    return str.indexOf(query.toUpperCase()) > -1;
+  });
+};
 
 export const queryFilter = (obj, search, radio) => {
   let keys = Object.keys(obj);
@@ -25,4 +25,4 @@ export const queryFilter = (obj, search, radio) => {
   }
 
   return keys;
-}
+};

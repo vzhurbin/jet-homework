@@ -1,9 +1,9 @@
-import React from "react";
-import TodoItem from "./TodoItem";
-import AddTodoForm from "./AddTodoForm";
+import React from 'react';
+import TodoItem from './TodoItem';
+import AddTodoForm from './AddTodoForm';
 import TextBox from '../components/TextBox';
 import Radio from '../components/Radio';
-import { queryFilter } from "../helpers";
+import { queryFilter } from '../helpers';
 
 export default class TodoList extends React.Component {
   state = {
@@ -12,9 +12,8 @@ export default class TodoList extends React.Component {
     text: '',
     label: 'low',
     selectedRadio: ''
-  }
+  };
 
-  // BUG: initial label is not parsed
   addTodo = event => {
     event.preventDefault();
     const todos = { ...this.state.todos };
@@ -22,18 +21,18 @@ export default class TodoList extends React.Component {
       label: this.state.label,
       text: this.state.text,
       isEdited: false
-    }
+    };
     this.setState({ todos: todos, text: '' });
-  }
+  };
 
   removeTodo = id => {
-    const todos = {...this.state.todos};
+    const todos = { ...this.state.todos };
     delete todos[id];
     this.setState({ todos });
-  }
+  };
 
   render() {
-    const todosObj = {...this.state.todos};
+    const todosObj = { ...this.state.todos };
     const search = this.state.search;
     const radio = this.state.selectedRadio;
     const todosKeys = queryFilter(todosObj, search, radio);
@@ -53,7 +52,7 @@ export default class TodoList extends React.Component {
           onChange={value => this.setState({ search: value })}
         />
         <Radio
-          selectedRadio = {this.state.selectedRadio}
+          selectedRadio={this.state.selectedRadio}
           onChange={e => this.setState({ selectedRadio: e.target.value })}
         />
         <ul>
@@ -70,7 +69,6 @@ export default class TodoList extends React.Component {
           })}
         </ul>
       </div>
-    )
+    );
   }
-
 }

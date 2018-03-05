@@ -1,11 +1,13 @@
-export const labels = [
+const labels = [
   {
-    value: 'low',
+    value: 'low'
   },
   {
-    value: 'med',
+    value: 'med'
   },
   {
-    value: 'high',
-  },
+    value: 'high'
+  }
 ];
+
+export default labels;

@@ -5,13 +5,13 @@ const TextBox = props => {
   const value = props.value || '';
   const placeholder = props.placeholder || '';
   return (
-    <input 
-      type="text" 
+    <input
+      type="text"
       value={value}
       placeholder={placeholder}
-      onChange={e => onChange(e.target.value)} 
+      onChange={e => onChange(e.target.value)}
     />
   );
-}
+};
 
 export default TextBox;
