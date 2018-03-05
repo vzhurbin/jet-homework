@@ -10,7 +10,7 @@ export default class TodoList extends React.Component {
     search: '',
     todos: {},
     text: '',
-    label: 'Low',
+    label: 'low',
     selectedRadio: ''
   }
 

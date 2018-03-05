@@ -1,19 +1,5 @@
 import React from 'react';
-
-const labels = [
-  // {
-  //   value: 'Priority',
-  // },
-  {
-    value: 'low',
-  },
-  {
-    value: 'med',
-  },
-  {
-    value: 'high',
-  },
-];
+import { labels } from '../constants/labels'
 
 const Radio = props => {
   const selectedRadio = props.selectedRadio;

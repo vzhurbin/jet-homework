@@ -1,26 +1,7 @@
 import React from 'react';
-
-const labels = [
-  // {
-  //   label: 'Priority',
-  //   value: '',
-  // },
-  {
-    label: 'Low',
-    value: 'low',
-  },
-  {
-    label: 'Med',
-    value: 'med',
-  },
-  {
-    label: 'High',
-    value: 'high',
-  },
-];
+import { labels } from '../constants/labels'
 
 const SelectBox = props => {
-  // const onChange = props.onLabelChange;
   return (
     <select 
       label={props.label} 
@@ -28,8 +9,8 @@ const SelectBox = props => {
     >
       {labels.map(item => {
         return (
-          <option key={`select${item.value}${item.label}`}>
-            {item.label}
+          <option key={`select${item.value}`}>
+            {item.value}
           </option>
         );
       })}
