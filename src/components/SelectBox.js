@@ -1,7 +1,7 @@
 import React from 'react';
 import labels from '../constants/labels';
 
-const SelectBox = props => {
+export default function SelectBox(props) {
   return (
     <select label={props.label} onChange={e => props.onChange(e)}>
       {labels.map(item => {
@@ -9,6 +9,4 @@ const SelectBox = props => {
       })}
     </select>
   );
-};
-
-export default SelectBox;
+}

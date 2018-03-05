@@ -1,6 +1,6 @@
 import React from 'react';
 
-const TextBox = props => {
+export default function TextBox(props) {
   const onChange = props.onChange;
   const value = props.value || '';
   const placeholder = props.placeholder || '';
@@ -12,6 +12,4 @@ const TextBox = props => {
       onChange={e => onChange(e.target.value)}
     />
   );
-};
-
-export default TextBox;
+}

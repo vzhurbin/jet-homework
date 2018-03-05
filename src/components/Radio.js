@@ -1,7 +1,7 @@
 import React from 'react';
 import labels from '../constants/labels';
 
-const Radio = props => {
+export default function Radio(props) {
   const selectedRadio = props.selectedRadio;
   return (
     <div className="radio-buttons">
@@ -20,6 +20,4 @@ const Radio = props => {
       })}
     </div>
   );
-};
-
-export default Radio;
+}

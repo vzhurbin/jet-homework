@@ -2,7 +2,7 @@ import React from 'react';
 import SelectBox from '../components/SelectBox';
 import TextBox from '../components/TextBox';
 
-const AddTodoForm = props => {
+export default function AddTodoForm(props) {
   const text = props.text;
   const label = props.label;
   return (
@@ -17,6 +17,4 @@ const AddTodoForm = props => {
       <button>+ Add</button>
     </form>
   );
-};
-
-export default AddTodoForm;
+}
