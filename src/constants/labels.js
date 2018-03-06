@@ -7,6 +7,9 @@ const labels = [
   },
   {
     value: 'high'
+  },
+  {
+    value: '(none)'
   }
 ];
 

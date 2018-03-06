@@ -6,7 +6,12 @@ export const filterObj = (arr, obj, query, searchKey) => {
 };
 
 export const queryFilter = (obj, search, radio) => {
-  let keys = Object.keys(obj);
+  let keys;
+  if (!obj) {
+    return [];
+  }
+
+  keys = Object.keys(obj);
 
   if (radio.length > 0 && search.length > 0) {
     keys = filterObj(keys, obj, radio, 'label');

@@ -4,8 +4,9 @@ import { TextBox, Button, SelectBox } from '../components';
 
 const propTypes = {
   id: PropTypes.string.isRequired,
-  removeTodo: PropTypes.func.isRequired,
-  todo: PropTypes.object.isRequired
+  todo: PropTypes.object.isRequired,
+  onRemoveTodo: PropTypes.func.isRequired,
+  onSaveEdit: PropTypes.func.isRequired
 };
 
 class TodoItem extends React.Component {
@@ -15,18 +16,20 @@ class TodoItem extends React.Component {
     isEdited: false
   };
 
-  onSaveEdit = () => {
+  onSaveEditHandler = event => {
     const { newTodoLabel, newTodoText } = this.state;
-    this.setState({
-      newTodoText: newTodoText,
-      newTodoLabel: newTodoLabel,
+    const { onSaveEdit, id } = this.props;
+    event.preventDefault();
+    const editedTodo = {
+      text: newTodoText,
+      label: newTodoLabel,
       isEdited: false
-    });
+    };
+    onSaveEdit(editedTodo, id);
+    this.setState({ isEdited: false });
   };
 
-  // BUG: after one edit onCancel restores initial value
-  // not the one before current edit
-  onCancelEdit = () => {
+  onCancelEditHandler = () => {
     const { todo } = this.props;
     this.setState({
       newTodoText: todo.text,
@@ -35,24 +38,23 @@ class TodoItem extends React.Component {
     });
   };
 
-  onClickEdit = () => this.setState({ isEdited: true });
-  onClickDelete = () => {
-    const { removeTodo, id } = this.props;
-    return removeTodo(id);
+  onClickEditHandler = () => this.setState({ isEdited: true });
+  onClickDeleteHandler = () => {
+    const { onRemoveTodo, id } = this.props;
+    return onRemoveTodo(id);
   };
 
   onLabelChange = event => this.setState({ newTodoLabel: event.target.value });
   onTextChange = value => this.setState({ newTodoText: value });
 
   renderView() {
-    const { id } = this.props;
-    const { newTodoLabel, newTodoText } = this.state;
+    const { id, todo } = this.props;
     return (
       <div className="todo-item" key={id}>
-        <strong>{newTodoLabel}</strong>
-        <span>{newTodoText}</span>
-        <Button onClick={this.onClickEdit} value="Edit" />
-        <Button onClick={this.onClickDelete} value="Delete" />
+        <strong>{todo.label}</strong>
+        <span>{todo.text}</span>
+        <Button onClick={this.onClickEditHandler} value="Edit" />
+        <Button onClick={this.onClickDeleteHandler} value="Delete" />
       </div>
     );
   }
@@ -63,9 +65,11 @@ class TodoItem extends React.Component {
     return (
       <div className="todo-item" key={id}>
         <SelectBox label={newTodoLabel} onChange={this.onLabelChange} />
-        <TextBox value={newTodoText} onChange={this.onTextChange} />
-        <Button onClick={this.onSaveEdit} value="Save" />
-        <Button onClick={this.onCancelEdit} value="Cancel" />
+        <form onSubmit={this.onSaveEditHandler}>
+          <TextBox value={newTodoText} onChange={this.onTextChange} />
+          <button>Save</button>
+        </form>
+        <Button onClick={this.onCancelEditHandler} value="Cancel" />
       </div>
     );
   }

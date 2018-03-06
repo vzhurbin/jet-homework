@@ -1,8 +1,8 @@
 import React from 'react';
-import TodoList from './containers/TodoList';
+import { TodoApp } from './containers';
 
 export default class App extends React.Component {
   render() {
-    return <TodoList />;
+    return <TodoApp />;
   }
 }

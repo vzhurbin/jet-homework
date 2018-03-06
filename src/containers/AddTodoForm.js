@@ -3,26 +3,47 @@ import PropTypes from 'prop-types';
 import { SelectBox, TextBox } from '../components';
 
 const propTypes = {
-  text: PropTypes.string.isRequired,
-  label: PropTypes.string.isRequired,
-  addTodo: PropTypes.func.isRequired,
-  onLabelChange: PropTypes.func.isRequired,
-  onInputChange: PropTypes.func.isRequired
+  onAddTodo: PropTypes.func.isRequired
 };
 
-function AddTodoForm({ text, label, addTodo, onLabelChange, onInputChange }) {
-  return (
-    <form onSubmit={e => addTodo(e)}>
-      <SelectBox label={label} onChange={onLabelChange} />
-      <TextBox
-        value={text}
-        placeholder="What to do?"
-        onChange={onInputChange}
-        autoFocus
-      />
-      <button>+ Add</button>
-    </form>
-  );
+class AddTodoForm extends React.Component {
+  state = {
+    newTodoLabel: 'low',
+    newTodoText: ''
+  };
+
+  onAddTodo = event => {
+    const { newTodoLabel, newTodoText } = this.state;
+    const { onAddTodo } = this.props;
+    event.preventDefault();
+    if (newTodoLabel.length > 0 && newTodoText.length > 0) {
+      const newTodo = {
+        text: newTodoText,
+        label: newTodoLabel,
+        isEdited: false
+      };
+      this.setState({ newTodoText: '' }, () => onAddTodo(newTodo));
+    }
+  };
+
+  onLabelChange = event => this.setState({ newTodoLabel: event.target.value });
+  onInputChange = value => this.setState({ newTodoText: value });
+
+  render() {
+    const { newTodoLabel, newTodoText } = this.state;
+    return (
+      <form onSubmit={this.onAddTodo}>
+        <SelectBox label={newTodoLabel} onChange={this.onLabelChange} />
+        <TextBox
+          value={newTodoText}
+          placeholder="What to do?"
+          onChange={this.onInputChange}
+          autoFocus
+        />
+        <button>+ Add</button>
+      </form>
+    );
+  }
 }
 
 AddTodoForm.propTypes = propTypes;
