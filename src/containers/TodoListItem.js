@@ -10,16 +10,16 @@ const propTypes = {
 
 class TodoItem extends React.Component {
   state = {
-    label: this.props.todo.label,
-    text: this.props.todo.text,
+    newTodoLabel: this.props.todo.label,
+    newTodoText: this.props.todo.text,
     isEdited: false
   };
 
   onSaveEdit = () => {
-    const { label, text } = this.state;
+    const { newTodoLabel, newTodoText } = this.state;
     this.setState({
-      text: text,
-      label: label,
+      newTodoText: newTodoText,
+      newTodoLabel: newTodoLabel,
       isEdited: false
     });
   };
@@ -29,8 +29,8 @@ class TodoItem extends React.Component {
   onCancelEdit = () => {
     const { todo } = this.props;
     this.setState({
-      text: todo.text,
-      label: todo.label,
+      newTodoText: todo.text,
+      newTodoLabel: todo.label,
       isEdited: false
     });
   };
@@ -41,16 +41,16 @@ class TodoItem extends React.Component {
     return removeTodo(id);
   };
 
-  onLabelChange = event => this.setState({ label: event.target.value });
-  onTextChange = value => this.setState({ text: value });
+  onLabelChange = event => this.setState({ newTodoLabel: event.target.value });
+  onTextChange = value => this.setState({ newTodoText: value });
 
   renderView() {
     const { id } = this.props;
-    const { label, text } = this.state;
+    const { newTodoLabel, newTodoText } = this.state;
     return (
       <div className="todo-item" key={id}>
-        <strong>{label}</strong>
-        <span>{text}</span>
+        <strong>{newTodoLabel}</strong>
+        <span>{newTodoText}</span>
         <Button onClick={this.onClickEdit} value="Edit" />
         <Button onClick={this.onClickDelete} value="Delete" />
       </div>
@@ -59,11 +59,11 @@ class TodoItem extends React.Component {
 
   renderEdit() {
     const { id } = this.props;
-    const { label, text } = this.state;
+    const { newTodoLabel, newTodoText } = this.state;
     return (
       <div className="todo-item" key={id}>
-        <SelectBox label={label} onChange={this.onLabelChange} />
-        <TextBox value={text} onChange={this.onTextChange} />
+        <SelectBox label={newTodoLabel} onChange={this.onLabelChange} />
+        <TextBox value={newTodoText} onChange={this.onTextChange} />
         <Button onClick={this.onSaveEdit} value="Save" />
         <Button onClick={this.onCancelEdit} value="Cancel" />
       </div>

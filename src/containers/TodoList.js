@@ -1,14 +1,14 @@
 import React from 'react';
-import { TodoItem, AddTodoForm } from '../containers';
+import { TodoListItem, AddTodoForm } from '../containers';
 import { TextBox, Radio } from '../components';
 import { queryFilter } from '../helpers';
 
 export default class TodoList extends React.Component {
   state = {
-    search: '',
-    todos: {},
-    text: '',
     label: 'low',
+    text: '',
+    todos: {},
+    search: '',
     selectedRadio: ''
   };
 
@@ -57,7 +57,7 @@ export default class TodoList extends React.Component {
         <ul>
           {todosKeys.map(key => {
             return (
-              <TodoItem
+              <TodoListItem
                 id={key}
                 key={key}
                 todo={todos[key]}
