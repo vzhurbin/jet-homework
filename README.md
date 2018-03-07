@@ -1,10 +1,10 @@
 ## To Do
 
-[ ] Select All radio button by default
+- Select All radio button by default
 
-[ ] Move all states up to parent
+- Move all states up to parent
 
-[ ] Separate filter component
+- Separate filter component
 
 
 ## Установка
