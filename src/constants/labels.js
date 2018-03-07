@@ -1,15 +1,12 @@
 const labels = [
   {
-    value: 'low'
+    value: 'Low'
   },
   {
-    value: 'med'
+    value: 'Med'
   },
   {
-    value: 'high'
-  },
-  {
-    value: '(none)'
+    value: 'High'
   }
 ];
 

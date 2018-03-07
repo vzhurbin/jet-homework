@@ -8,9 +8,18 @@ const propTypes = {
 };
 
 function Radio({ selectedRadio, onChange }) {
-  const onRadioChange = e => onChange(e);
   return (
     <div className="radio-buttons">
+      <strong>Show Labels: </strong>
+      <label key={`radioAll`}>
+        <input
+          type="radio"
+          value="All"
+          checked={selectedRadio === 'All'}
+          onChange={onChange}
+        />
+        {'All'}
+      </label>
       {labels.map(item => {
         return (
           <label key={`radio${item.value}`}>
@@ -18,7 +27,7 @@ function Radio({ selectedRadio, onChange }) {
               type="radio"
               value={item.value}
               checked={selectedRadio === item.value}
-              onChange={onRadioChange}
+              onChange={onChange}
             />
             {item.value}
           </label>

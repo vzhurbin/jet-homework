@@ -12,16 +12,13 @@ const defaultProps = {
   placeholder: ''
 };
 
-// const onButtonClick = e => onChange(e.target.value);
-
 function TextBox({ onChange, value, placeholder }) {
-  const onButtonClick = e => onChange(e.target.value);
   return (
     <input
       type="text"
       value={value}
       placeholder={placeholder}
-      onChange={onButtonClick}
+      onChange={onChange}
     />
   );
 }

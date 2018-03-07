@@ -7,14 +7,9 @@ const propTypes = {
   label: PropTypes.string
 };
 
-const defaultProps = {
-  label: 'low'
-};
-
 function SelectBox({ label, onChange }) {
-  const onLabelChange = e => onChange(e);
   return (
-    <select label={label} onChange={onLabelChange}>
+    <select label={label} onChange={onChange}>
       {labels.map(item => {
         return <option key={`select${item.value}`}>{item.value}</option>;
       })}
@@ -23,6 +18,5 @@ function SelectBox({ label, onChange }) {
 }
 
 SelectBox.propTypes = propTypes;
-SelectBox.defaultProps = defaultProps;
 
 export default SelectBox;

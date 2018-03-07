@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { SelectBox, TextBox } from '../components';
+import labels from '../constants/labels';
 
 const propTypes = {
   onAddTodo: PropTypes.func.isRequired
@@ -8,14 +9,14 @@ const propTypes = {
 
 class AddTodoForm extends React.Component {
   state = {
-    newTodoLabel: 'low',
+    newTodoLabel: labels[0].value,
     newTodoText: ''
   };
 
-  onAddTodo = event => {
+  onAddTodo = e => {
     const { newTodoLabel, newTodoText } = this.state;
     const { onAddTodo } = this.props;
-    event.preventDefault();
+    e.preventDefault();
     if (newTodoLabel.length > 0 && newTodoText.length > 0) {
       const newTodo = {
         text: newTodoText,
@@ -26,8 +27,8 @@ class AddTodoForm extends React.Component {
     }
   };
 
-  onLabelChange = event => this.setState({ newTodoLabel: event.target.value });
-  onInputChange = value => this.setState({ newTodoText: value });
+  onLabelChange = e => this.setState({ newTodoLabel: e.target.value });
+  onInputChange = e => this.setState({ newTodoText: e.target.value });
 
   render() {
     const { newTodoLabel, newTodoText } = this.state;

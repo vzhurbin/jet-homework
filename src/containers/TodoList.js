@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { TodoListItem } from '../containers';
 import { TextBox, Radio } from '../components';
-import { queryFilter } from '../helpers';
+import queryFilter from '../helpers';
 
 const propTypes = {
   onRemoveTodo: PropTypes.func,
@@ -16,12 +16,11 @@ class TodoList extends React.Component {
     selectedRadio: ''
   };
 
-  onSearchChange = value => this.setState({ search: value });
+  onSearchChange = e => this.setState({ search: e.target.value });
 
-  onRadioChange = event => {
-    const value = event.target.value;
-    const radio = value === '(none)' ? '' : value;
-    this.setState({ selectedRadio: radio });
+  onRadioChange = e => {
+    const value = e.target.value;
+    this.setState({ selectedRadio: value });
   };
 
   render() {

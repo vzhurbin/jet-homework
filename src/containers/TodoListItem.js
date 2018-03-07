@@ -16,10 +16,10 @@ class TodoItem extends React.Component {
     isEdited: false
   };
 
-  onSaveEditHandler = event => {
+  onSaveEditHandler = e => {
     const { newTodoLabel, newTodoText } = this.state;
     const { onSaveEdit, id } = this.props;
-    event.preventDefault();
+    e.preventDefault();
     const editedTodo = {
       text: newTodoText,
       label: newTodoLabel,
@@ -44,8 +44,8 @@ class TodoItem extends React.Component {
     return onRemoveTodo(id);
   };
 
-  onLabelChange = event => this.setState({ newTodoLabel: event.target.value });
-  onTextChange = value => this.setState({ newTodoText: value });
+  onLabelChange = e => this.setState({ newTodoLabel: e.target.value });
+  onTextChange = e => this.setState({ newTodoText: e.target.value });
 
   renderView() {
     const { id, todo } = this.props;
