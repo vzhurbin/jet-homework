@@ -1,8 +1,11 @@
 ## To Do
 
 [ ] Select All radio button by default
+
 [ ] Move all states up to parent
+
 [ ] Separate filter component
+
 
 ## Установка
 
