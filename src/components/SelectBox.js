@@ -9,7 +9,11 @@ const propTypes = {
 
 function SelectBox({ label, onChange }) {
   return (
-    <select label={label} onChange={onChange}>
+    <select
+      label={label}
+      onChange={onChange}
+      defaultValue={label ? label : labels[0].value}
+    >
       {labels.map(item => {
         return <option key={`select${item.value}`}>{item.value}</option>;
       })}
